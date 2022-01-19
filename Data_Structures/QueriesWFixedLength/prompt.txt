@@ -1,0 +1,82 @@
+Consider an n-integer sequence, A{a_0,a_1,...,a_n-1}. We perform a query on A by using an integer, d, to calculate the result of the following expression:
+min(max(a_j))
+where: 0<=i<=n-d and i<=j<i+d
+
+In other words, if we let m_i=max(a_i,a_i+1,...,a_i+d-1), then you need to calculate min(m_0,m_1,...,m_n-d).
+Given arr and q queries, return a list of answers to each query.
+
+Example
+arr = [2,3,4,5,6]
+queries = [2,3]
+
+The first query uses all of the subarrays of length 2: [2,3],[3,4],[4,5],[5,6]. The maxima of the subarrays are [3,4,5,6]. The minimum of these is 3.
+The second query uses all of the subarrays of length 3: [2,3,4],[3,4,5],[4,5,6]. The maxima of the subarrays are [4,5,6]. The minimum of these is 4.
+Return [3,4].
+
+Function Description
+Complete the solve function below.
+solve has the following parameter(s):
+* int arr[n]: an array of integers
+* int queries[q]: the lengths of subarrays to query
+
+Returns
+int[q]: the answers to each query
+
+Input Format
+The first line consists of two space-separated integers, n and q.
+The second line consists of n space-separated integers, the elements of arr.
+Each of the q subsequent lines contains a single integer denoting the value of d for that query.
+
+
+Sample Input 0
+5 5
+33 11 44 11 55
+1
+2
+3
+4
+5
+
+Sample Output 0
+11
+33
+44
+44
+55
+
+Explanation 0
+For d = 1, the answer is
+  min(max([33]),max([11]),max([44]),max([11]),max([55])) = 11
+.
+For d = 2, the answer is
+  min(max([33,11]),max([11,44]),max([44,11]),max([11,55])) = 33
+.
+For d = 3, the answer is
+  min(max([33,11,44]),max([11,44,11]),max([11,44,55])) = 44
+.
+For d = 4, the answer is
+  min(max([33,11,44,11]),max([11,44,11,55])) = 44
+.
+For d = 5, the answer is
+  min(max([33,11,44,11,55])) = 55
+.
+
+
+Sample Input 1
+5 5
+1 2 3 4 5
+1
+2
+3
+4
+5
+
+Sample Output 1
+1
+2
+3
+4
+5
+
+Explanation 1
+For each query, the "prefix" has the least maximum value among the consecutive subsequences of the same size.
